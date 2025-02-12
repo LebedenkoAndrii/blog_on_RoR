@@ -26,8 +26,9 @@
                   Profile [<%= current_user.username %>]
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <li><%= link_to "View your profile", user_path(current_user), class: "dropdown-item"%></li>
-                  <li><%= link_to "Edit your profile", edit_user_path(current_user), class: "dropdown-item"%></li>
+                  <li><%= link_to "View your profile", user_path(current_user), class: "dropdown-item" %></li>
+                  <li><%= link_to "Edit your profile", edit_user_path(current_user), class: "dropdown-item" %></li>
+                  <li><%= link_to "Delete profile", user_path(current_user), class: "dropdown-item text-danger",  data: {turbo_confirm: "Are you sure?", turbo_method: :delete } %></li>
                 </ul>
               </div>
                 <%= link_to "Logout", logout_path, class: "nav-link", data: {turbo_confirm: "Are you sure?", turbo_method: :delete } %>
