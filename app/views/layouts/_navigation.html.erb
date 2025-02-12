@@ -7,10 +7,29 @@
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
               <%= link_to "Bloggers", users_path, class: "nav-link"%>
-              <%= link_to "View articles", articles_path, class: "nav-link"%>
-              <%= link_to "New article", new_article_path, class: "nav-link"%>
+
+              <div class="nav-item dropdown">
+                <button id="dropdownMenuButton" class="btn nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Articles
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li><%= link_to "View articles", articles_path, class: "nav-link"%></li>
+                  <% if logged_in? %>
+                    <li><%= link_to "New article", new_article_path, class: "nav-link"%></li>
+                  <% end %>
+                </ul>
+              </div>
+
               <% if logged_in? %>
-                <%= link_to current_user.username, user_path(current_user), class: "nav-link" %>
+              <div class="nav-item dropdown">
+                <button id="dropdownMenuButton" class="btn nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Profile [<%= current_user.username %>]
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li><%= link_to "View your profile", user_path(current_user), class: "dropdown-item"%></li>
+                  <li><%= link_to "Edit your profile", edit_user_path(current_user), class: "dropdown-item"%></li>
+                </ul>
+              </div>
                 <%= link_to "Logout", logout_path, class: "nav-link", data: {turbo_confirm: "Are you sure?", turbo_method: :delete } %>
               <% else %>
                 <%= link_to "Log in", login_path, class: "nav-link"%>
